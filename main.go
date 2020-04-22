@@ -39,8 +39,7 @@ func main() {
 	//  cont: []string, the new content of "README.md", mixed by "today" and "history"
 
 
-	rtapi := "B63IavC02qsRZ4QZjl7lURlX6wiV_D_m9Z4ReXvR"
-		//os.Getenv("RESCUETIME_API_KEY")  // like: "B63IavC02qsRZ4QZjl7lURlX6wiV_D_m9Z4ReXvR"
+	rtapi := os.Getenv("RESCUETIME_API_KEY")  // like: "B63IavC02qsRZ4QZjl7lURlX6wiV_D_m9Z4ReXvR"
 
 	un := os.Getenv("GITHUB_USERNAME") // like: "yiyangiliu"
 	pw := os.Getenv("GITHUB_PASSWORD") // like: "abC123!@#"
