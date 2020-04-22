@@ -66,7 +66,7 @@ func getToday(data *rescuetime.AnalyticData) []string {
 	var cont []string
 	t := time.Now().Format("2006-01-02 15:04")
 	hrow := "## yiyangiliu " + t[:10] + " Detailed Activaties, "
-	shrow := "Updated at " + t[11:]
+	shrow := "Update at " + t[11:]
 	frow := "|Rank|Activity|Time|Category|Label|"
 	srow := "|-|-|-|-|-|"
 	var trow []string
