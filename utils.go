@@ -33,7 +33,7 @@ func NewAnalyticDataQueryParameters(Perspective, ResolutionTime, RestrictGroup, 
 		adqp.RestrictBegin = RestrictBegin
 	}
 	if RestrictEnd == "" {
-		adqp.RestrictEnd = time.Now().Format("2006-01-02")
+		adqp.RestrictEnd = time.Now().Add(24 * time.Hour).Format("2006-01-02")
 	} else {
 		adqp.RestrictEnd = RestrictEnd
 	}
@@ -62,17 +62,25 @@ func sec2hour(sec int) string {
 	return s
 }
 
+func sec2asterisk(sec int) string {
+	if sec >= 14100 {return "***********************************************"}
+	l := sec / 300
+	if l == 0 {return ""}
+	return strings.Repeat("*", l)
+}
+
 func getToday(data *rescuetime.AnalyticData) []string {
 	var cont []string
 	t := time.Now().Format("2006-01-02 15:04")
 	hrow := "## yiyangiliu " + t[:10] + " Detailed Activaties, "
 	shrow := "Update at " + t[11:]
-	frow := "|Rank|Activity|Time|Category|Label|"
-	srow := "|-|-|-|-|-|"
+	frow := "|Rank|Activity|Len|Time|Category|Label|"
+	srow := "|-|-|-|-|-|-|"
 	var trow []string
 	for i, row := range data.Rows{
 		if i == 15 {break}
 		t := sec2hour(row.TimeSpentSeconds)
+		l := sec2asterisk(row.TimeSpentSeconds)
 		act := row.Activity
 		if len(act) > 14 {
 			act = act[:14]
@@ -99,7 +107,7 @@ func getToday(data *rescuetime.AnalyticData) []string {
 		if len(categ) > 12 {
 			categ = categ[:12]
 		}
-		r :="|" + strconv.Itoa(row.Rank) + "|" + act + "|" + t + "|" + categ + "|" + strconv.Itoa(row.Productivity)+ "|"
+		r :="|" + strconv.Itoa(row.Rank) + "|" + act + "|" + l +"|" + t + "|" + categ + "|" + strconv.Itoa(row.Productivity)+ "|"
 		trow = append(trow, r)
 		//fmt.Println(string()
 	}
