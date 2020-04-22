@@ -179,6 +179,6 @@ func main() {
 	err := writef(cont, "C:/SakilaGithub/RescueTime-Record/README.md")
 	if err == nil {fmt.Println("Update success")}
 
-	//os.Args("")
+	os.Args("")
 
 }
