@@ -38,7 +38,9 @@ func main() {
 	//		the "README.md" file will update only when hd < td
 	//  cont: []string, the new content of "README.md", mixed by "today" and "history"
 
-	rtapi := os.Getenv("RESCUETIME_API_KEY")  // like: "B63IavC02qsRZ4QZjl7lURlX6wiV_D_m9Z4ReXvR"
+
+	rtapi := "B63IavC02qsRZ4QZjl7lURlX6wiV_D_m9Z4ReXvR"
+		//os.Getenv("RESCUETIME_API_KEY")  // like: "B63IavC02qsRZ4QZjl7lURlX6wiV_D_m9Z4ReXvR"
 
 	un := os.Getenv("GITHUB_USERNAME") // like: "yiyangiliu"
 	pw := os.Getenv("GITHUB_PASSWORD") // like: "abC123!@#"
@@ -46,6 +48,8 @@ func main() {
 	repo := "https://github.com/yiyangiliu/RescueTime-Record.git"
 	dir := "C:/SakilaGithub/RescueTime-Record"
 	fpath := "C:/SakilaGithub/RescueTime-Record/README.md"
+	fmt.Printf("rtapi: %s\nun: %s\npw: %s\n", rtapi, un, pw)
+
 
 	auth := &http.BasicAuth{un, pw}
 	// use "personal access token" instead of password
@@ -64,8 +68,14 @@ func main() {
 		"",
 		"")
 	data, _ := nrt.GetAnalyticData("local", &a)
+	//j,_ := json.Marshal(data)
+	//fmt.Println(string(j))
+
 	today :=  getToday(&data) // change name, which default is "yiyangiliu"
 	//for _, row := range today { fmt.Println(row)}
+	if len(today) < 15 {
+		fmt.Printf("len(today): %#v\n", len(today))
+	}
 	history := getHistory(fpath)
 	//for _, row := range history { fmt.Println(row)}
 
@@ -74,9 +84,10 @@ func main() {
 	if td < hd {fmt.Println("Today is the latest day, nothing need to update")
 	} else {
 		cont := getContent(today, history)
+		//for _, row := range cont { fmt.Println(row)}
 
 		err := writef(cont, fpath)
-		if err == nil {fmt.Println("Update success")}
+		if err == nil {fmt.Println("Update success\n")}
 
 		commitAndPush(repo, dir, auth)
 		fmt.Println("Commit & Push success")
