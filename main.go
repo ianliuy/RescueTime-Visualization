@@ -39,10 +39,10 @@ func main() {
 	// cont: []string, the new content of "README.md", mixed by "today" and "history"
 
 	//if use proxy:
-	//err := os.Setenv("http_proxy", "http://127.0.0.1:1080")
-	//if err != nil {}
-	//err = os.Setenv("https_proxy", "http://127.0.0.1:1080")
-	//if err != nil {}
+	err := os.Setenv("http_proxy", "http://127.0.0.1:1080")
+	if err != nil {}
+	err = os.Setenv("https_proxy", "http://127.0.0.1:1080")
+	if err != nil {}
 
 
 	rtapi := os.Getenv("RESCUETIME_API_KEY")  // like: "B63IavC02qsRZ4QZjl7lURlX6wiV_D_m9Z4ReXvR"
