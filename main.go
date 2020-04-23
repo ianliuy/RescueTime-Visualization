@@ -84,7 +84,11 @@ func main() {
 
 	hd := history[3][14:24]
 	td := time.Now().Format("2006-01-02")
-	if td <= hd {fmt.Println("Today is the latest day, nothing needs to update")
+	if td <= hd {
+		fmt.Println("Today is the latest day, nothing needs to update")
+		//cont := coverContent(today, history)
+
+
 	} else {
 		cont := getContent(today, history)
 		//for _, row := range cont { fmt.Println(row)}
