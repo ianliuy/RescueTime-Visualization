@@ -49,24 +49,32 @@ func sec2hour(sec int) string {
 	s := ""
 	h := sec / 3600
 	if h != 0 {
-		s = s + strconv.Itoa(h) + "h"
+		s = s + strconv.Itoa(h)
+		if len(s) == 1 {s = "0" + s}
+		s = s + "h"
 	}
 	m := (sec % 3600) / 60
+	s2 := ""
 	if m != 0 {
-		s = s + strconv.Itoa(m) + "m"
+		s2 = s2 + strconv.Itoa(m)
+		if len(s2) == 1 {s2 = "0" + s2}
+		s2 = s2 + "m"
 	}
 	second := sec % 60
+	s3 := ""
 	if !strings.Contains(s, "h") {
-		s = s + strconv.Itoa(second) + "s"
+		s3 = s3 + strconv.Itoa(second)
+		if len(s3) == 1 {s3 = "0" + s3}
+		s3 = s3 + "s"
 	}
-	return s
+	return s + s2 + s3
 }
 
 func sec2asterisk(sec int) string {
-	if sec >= 14100 {return "***********************************************"}
-	l := sec / 300
+	if sec >= 21600 {return "lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll"}
+	l := sec / 240
 	if l == 0 {return ""}
-	return strings.Repeat("*", l)
+	return strings.Repeat("l", l)
 }
 
 func getToday(data *rescuetime.AnalyticData) []string {
@@ -82,32 +90,46 @@ func getToday(data *rescuetime.AnalyticData) []string {
 		t := sec2hour(row.TimeSpentSeconds)
 		l := sec2asterisk(row.TimeSpentSeconds)
 		act := row.Activity
+		switch act {
+		case "mobile - tv.danmaku.bili": 			act = "(m)bilibili"
+		case "YouTube for Android":					act = "(m)Youtube"
+		case "mobile - com.reddit.frontpage": 		act = "(m)Reddit"
+		case "mobile - air.tv.douyu.android": 		act = "(m)douyu"
+		case "WeChat / Weixin": 					act = "Wechat"
+		case "Google Chrome for Android": 			act = "(m)Chrome"
+		case "Visual Studio Code": 					act = "VS Code"
+		case "Windows Explorer": 					act = "Win Explorer"
+		case "mobile - com.hengye.share": 			act = "(m)share"
+		}
+		if strings.Contains(act, ".github.io") {
+			act = "*.github.io"
+		}
 		if len(act) > 14 {
 			act = act[:14]
 		}
 		categ := row.Category
 		switch categ {
-		case "Editing & IDEs":
-			categ = "IDE"
-		case "General Software Development":
-			categ = "Dev"
-		case "General Social Networking":
-			categ = "SNS"
-		case "General Reference & Learning":
-			categ = "Ref&Learn"
-		case "Internet Utilities":
-			categ = "Utils"
-		case "General Utilities":
-			categ = "Utils"
-		case "Uncategorized":
-			categ = "Unknown"
-		case "Presentation":
-			categ = "Pre"
+		case "Editing & IDEs":						categ = "IDE"
+		case "General Software Development":		categ = "Dev"
+		case "General Social Networking":			categ = "SNS"
+		case "General Reference & Learning":		categ = "Ref&Learn"
+		case "Internet Utilities":					categ = "Utils"
+		case "General Utilities":					categ = "Utils"
+		case "Uncategorized":						categ = "Unknown"
+		case "Presentation":						categ = "Pre"
+		}
+		p := strconv.Itoa(row.Productivity)
+		switch p {
+		case "2": p = "💖"
+		case "1": p = "❤"
+		case "0": p = "🙂"
+		case "-1": p = "😥"
+		case "-2": p = "💚"
 		}
 		if len(categ) > 12 {
 			categ = categ[:12]
 		}
-		r :="|" + strconv.Itoa(row.Rank) + "|" + act + "|" + l +"|" + t + "|" + categ + "|" + strconv.Itoa(row.Productivity)+ "|"
+		r :="|" + strconv.Itoa(row.Rank) + "|" + act + "|" + l +"|" + t + "|" + categ + "|" + p + "|"
 		trow = append(trow, r)
 		//fmt.Println(string()
 	}
