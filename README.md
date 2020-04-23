@@ -5,7 +5,7 @@ Personal Demo: [yiyangiliu/RescueTime-Record](https://github.com/yiyangiliu/Resc
 
 ## Quick Start
 
-1. [Create a repository](https://help.github.com/en/enterprise/2.14/user/articles/creating-a-new-repository) and [clone it](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) to your local
+1. [Create a repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-new-repository) and [clone it](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) to your local
 
 2. [set system environment variables](https://www.google.com/search?q=set+system+environment+variables)
 
