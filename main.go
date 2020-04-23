@@ -38,10 +38,11 @@ func main() {
 	//		the "README.md" file will update only when hd < td
 	// cont: []string, the new content of "README.md", mixed by "today" and "history"
 
-	err := os.Setenv("http_proxy", "http://127.0.0.1:1080")
-	if err != nil {}
-	err = os.Setenv("https_proxy", "http://127.0.0.1:1080")
-	if err != nil {}
+	//if use proxy:
+	//err := os.Setenv("http_proxy", "http://127.0.0.1:1080")
+	//if err != nil {}
+	//err = os.Setenv("https_proxy", "http://127.0.0.1:1080")
+	//if err != nil {}
 
 
 	rtapi := os.Getenv("RESCUETIME_API_KEY")  // like: "B63IavC02qsRZ4QZjl7lURlX6wiV_D_m9Z4ReXvR"
@@ -83,7 +84,7 @@ func main() {
 
 	hd := history[3][14:24]
 	td := time.Now().Format("2006-01-02")
-	if td <= hd {fmt.Println("Today is the latest day, nothing need to update")
+	if td <= hd {fmt.Println("Today is the latest day, nothing needs to update")
 	} else {
 		cont := getContent(today, history)
 		//for _, row := range cont { fmt.Println(row)}
