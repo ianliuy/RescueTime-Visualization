@@ -34,7 +34,7 @@ Author: &object.Signature{
 
 5\. `go build *.go` and run `main.exe`
 
-6\. [Create a scheduled task](https://www.google.com/search?q=windows+create+scheduled+task) 
+6\. [Creating a scheduled task](https://www.google.com/search?q=windows+create+scheduled+task) to run `main.exe` at the end of a day
 
 ## variables explanation
 
