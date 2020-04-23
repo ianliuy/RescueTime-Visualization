@@ -5,9 +5,9 @@ Personal Demo: [yiyangiliu/RescueTime-Record](https://github.com/yiyangiliu/Resc
 
 ## Quick Start
 
-1\. [Create a repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-new-repository) and [clone it](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) to your local
+1\. [Create a repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-new-repository) with "README.md" and [clone it](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) to your local
 
-2\. [set system environment variables](https://www.google.com/search?q=set+system+environment+variables)
+2\. [Set system environment variables](https://www.google.com/search?q=set+system+environment+variables)
 
 |key|value|
 |-|-|
@@ -30,7 +30,11 @@ Author: &object.Signature{
     When:  time.Now(),
 }
 ```
-4\. `go build *.go` and run `main.exe`
+4\. `go run *.go` and see if it works properly
+
+5\. `go build *.go` and run `main.exe`
+
+6\. [Create a scheduled task](https://www.google.com/search?q=windows+create+scheduled+task) 
 
 ## variables explanation
 
