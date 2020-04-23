@@ -3,6 +3,21 @@
 
 Personal Demo: [yiyangiliu/RescueTime-Record](https://github.com/yiyangiliu/RescueTime-Record)
 
+## Quick Start
+
+1. [Create a repository](https://help.github.com/en/enterprise/2.14/user/articles/creating-a-new-repository) and [clone it](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) to your local
+
+2. [set system environment variables](https://www.google.com/search?q=set+system+environment+variables)
+
+|key|value|
+|-|-|
+|RESCUETIME_API_KEY|[Your RescueTime API Key](https://www.rescuetime.com/anapi/manage)|
+|GITHUB_USERNAME|yiyangiliu|
+|GITHUB_PASSWORD|abC123!@#|
+
+3. run `main.exe`
+
+
 
 ```golang
 Variables:
