@@ -5,9 +5,9 @@ Personal Demo: [yiyangiliu/RescueTime-Record](https://github.com/yiyangiliu/Resc
 
 ## Quick Start
 
-1. [Create a repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-new-repository) and [clone it](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) to your local
+1\. [Create a repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-new-repository) and [clone it](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) to your local
 
-2. [set system environment variables](https://www.google.com/search?q=set+system+environment+variables)
+2\. [set system environment variables](https://www.google.com/search?q=set+system+environment+variables)
 
 |key|value|
 |-|-|
@@ -15,9 +15,24 @@ Personal Demo: [yiyangiliu/RescueTime-Record](https://github.com/yiyangiliu/Resc
 |GITHUB_USERNAME|yiyangiliu|
 |GITHUB_PASSWORD|abC123!@#|
 
-3. `go build *.go` and run `main.exe`
+3\. modify code
 
+```golang
+repo := "https://github.com/yiyangiliu/RescueTime-Record.git"
+dir := "C:/SakilaGithub/RescueTime-Record"
+fpath := "C:/SakilaGithub/RescueTime-Record/README.md"
+```
 
+```golang
+Author: &object.Signature{
+    Name:  "yiyangiliu", 
+    Email: "i@yiyangliu.me",
+    When:  time.Now(),
+}
+```
+4\. `go build *.go` and run `main.exe`
+
+## variables explanation
 
 ```golang
 Variables:
