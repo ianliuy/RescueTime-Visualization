@@ -15,7 +15,7 @@ Personal Demo: [yiyangiliu/RescueTime-Record](https://github.com/yiyangiliu/Resc
 |GITHUB_USERNAME|yiyangiliu|
 |GITHUB_PASSWORD|abC123!@#|
 
-3. run `main.exe`
+3. `go build *.go` and run `main.exe`
 
 
 
