@@ -38,6 +38,11 @@ func main() {
 	//		the "README.md" file will update only when hd < td
 	//  cont: []string, the new content of "README.md", mixed by "today" and "history"
 
+	err := os.Setenv("http_proxy", "http://127.0.0.1:1080")
+	if err != nil {}
+	err = os.Setenv("https_proxy", "http://127.0.0.1:1080")
+	if err != nil {}
+
 
 	rtapi := os.Getenv("RESCUETIME_API_KEY")  // like: "B63IavC02qsRZ4QZjl7lURlX6wiV_D_m9Z4ReXvR"
 
@@ -66,15 +71,13 @@ func main() {
 		"",
 		"",
 		"")
-	data, _ := nrt.GetAnalyticData("local", &a)
+	data, _ := nrt.GetAnalyticData("", &a)
 	//j,_ := json.Marshal(data)
 	//fmt.Println(string(j))
 
 	today :=  getToday(&data) // change name, which default is "yiyangiliu"
 	//for _, row := range today { fmt.Println(row)}
-	if len(today) < 15 {
-		fmt.Printf("len(today): %#v\n", len(today))
-	}
+	if len(today) < 15 {fmt.Printf("len(today): %#v\n", len(today))}
 	history := getHistory(fpath)
 	//for _, row := range history { fmt.Println(row)}
 
