@@ -1,6 +1,7 @@
 package main
 
 import (
+	//"encoding/json"
 	"fmt"
 	"github.com/go-git/go-git/plumbing/transport/http"
 	"os"
@@ -64,7 +65,8 @@ func main() {
 	//cloneYourRepository(repo, dir, auth)
 
 	nrt := NewRescueTime(rtapi)
-	a := NewAnalyticDataQueryParameters("",
+	a := NewAnalyticDataQueryParameters(
+		"",
 		"",
 		"",
 		"", //2020-04-21
@@ -75,6 +77,8 @@ func main() {
 	data, _ := nrt.GetAnalyticData("", &a)
 	//j,_ := json.Marshal(data)
 	//fmt.Println(string(j))
+
+
 
 	today :=  getToday(&data) // change name, which default is "yiyangiliu"
 	//for _, row := range today { fmt.Println(row)}
@@ -88,11 +92,12 @@ func main() {
 	var cont []string
 	if td == hd {
 		cont = coverContent(today, history)
-		for _, row := range cont { fmt.Println(row)}
+		//for _, row := range cont { fmt.Println(row)}
 	} else if td < hd {
+		cont = getContent(today, history)
 	} else {
 		cont = getContent(today, history)
-		for _, row := range cont { fmt.Println(row)}
+		//for _, row := range cont { fmt.Println(row)}
 	}
 
 	err = writef(cont, fpath)
