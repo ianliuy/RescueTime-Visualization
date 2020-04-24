@@ -23,9 +23,12 @@ func NewAnalyticDataQueryParameters(Perspective, ResolutionTime, RestrictGroup, 
 		adqp.Perspective = Perspective
 	}
 	if ResolutionTime == ""{
-		adqp.ResolutionTime = "day"
+		adqp.ResolutionTime = ""
 	} else {
 		adqp.ResolutionTime = ResolutionTime
+	}
+	if RestrictGroup == "" {
+		adqp.RestrictGroup = ""
 	}
 	if RestrictBegin == "" {
 		adqp.RestrictBegin = time.Now().Format("2006-01-02") // Today
@@ -41,6 +44,16 @@ func NewAnalyticDataQueryParameters(Perspective, ResolutionTime, RestrictGroup, 
 		adqp.RestrictKind = "activity"
 	} else {
 		adqp.RestrictKind = RestrictKind
+	}
+	if RestrictThing == "" {
+		adqp.RestrictThing = ""
+	} else {
+		adqp.RestrictThing = RestrictThing
+	}
+	if RestrictThingy == "" {
+		adqp.RestrictThingy = ""
+	} else {
+		adqp.RestrictThingy = RestrictThingy
 	}
 	return adqp
 }
@@ -100,6 +113,8 @@ func getToday(data *rescuetime.AnalyticData) []string {
 		case "Visual Studio Code": 					act = "VS Code"
 		case "Windows Explorer": 					act = "Win Explorer"
 		case "mobile - com.hengye.share": 			act = "(m)share"
+		case "wechat":								act = "(m)Wechat"
+		case "Google Chrome":						act = "Chrome"
 		}
 		if strings.Contains(act, ".github.io") {
 			act = "*.github.io"
