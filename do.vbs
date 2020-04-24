@@ -1,2 +1,0 @@
-createobject("wscript.shell").run "C:\01_AllDownloads\05_Projects\Gogogo\RescueTime-Github\main.bat",0
-createobject("wscript.shell").run "C:\01_AllDownloads\05_Projects\Gogogo\RescueTime-Github\main.exe",0
