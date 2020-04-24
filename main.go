@@ -82,21 +82,22 @@ func main() {
 	history := getHistory(fpath)
 	//for _, row := range history { fmt.Println(row)}
 
-	hd := history[3][14:24]
+	hd := history[5][14:24]
 	td := time.Now().Format("2006-01-02")
-	if td <= hd {
-		fmt.Println("Today is the latest day, nothing needs to update")
-		//cont := coverContent(today, history)
 
-
+	var cont []string
+	if td == hd {
+		cont = coverContent(today, history)
+		for _, row := range cont { fmt.Println(row)}
+	} else if td < hd {
 	} else {
-		cont := getContent(today, history)
-		//for _, row := range cont { fmt.Println(row)}
-
-		err := writef(cont, fpath)
-		if err == nil {fmt.Println("Update success\n")}
-
-		commitAndPush(repo, dir, auth)
-		fmt.Println("Commit & Push success")
+		cont = getContent(today, history)
+		for _, row := range cont { fmt.Println(row)}
 	}
+
+	err = writef(cont, fpath)
+	if err == nil {fmt.Println("Update success\n")}
+
+	commitAndPush(repo, dir, auth)
+	fmt.Println("Commit & Push success")
 }
