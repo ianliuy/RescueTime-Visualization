@@ -33,7 +33,7 @@ func NewAnalyticDataQueryParameters(Perspective, ResolutionTime, RestrictGroup, 
 		adqp.RestrictBegin = RestrictBegin
 	}
 	if RestrictEnd == "" {
-		adqp.RestrictEnd = time.Now().Add(24 * time.Hour).Format("2006-01-02")
+		adqp.RestrictEnd = time.Now().Format("2006-01-02")
 	} else {
 		adqp.RestrictEnd = RestrictEnd
 	}
@@ -182,10 +182,18 @@ func writef(lines []string, path string) error {
 
 func getContent(t, h []string) []string {
 	var cont []string
-	cont = append(cont, h[:3]...)
+	cont = append(cont, h[:5]...)
 	cont = append(cont, t...)
 	cont = append(cont, "")
-	cont = append(cont, h[3:]...)
+	cont = append(cont, h[5:]...)
+	return cont
+}
+
+func coverContent(t, h []string) []string {
+	var cont []string
+	cont = append(cont, h[:5]...)
+	cont = append(cont, t...)
+	cont = append(cont, h[26:]...)
 	return cont
 }
 
