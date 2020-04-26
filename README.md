@@ -1,5 +1,5 @@
 # RescueTime-Github
-📊 **Automatically** show `RescueTime daily Data` on your `Github repository`
+📊 **Automatically** display `RescueTime daily Data` in your `Github repository`
 
 Demo: [yiyangiliu/RescueTime-Record](https://github.com/yiyangiliu/RescueTime-Record)
 
