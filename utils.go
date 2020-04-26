@@ -108,12 +108,12 @@ func getToday(data *rescuetime.AnalyticData) []string {
 		case "YouTube for Android":					act = "(m)Youtube"
 		case "mobile - com.reddit.frontpage": 		act = "(m)Reddit"
 		case "mobile - air.tv.douyu.android": 		act = "(m)douyu"
-		case "WeChat / Weixin": 					act = "Wechat"
+		case "WeChat / Weixin": 					act = "(m)Wechat"
 		case "Google Chrome for Android": 			act = "(m)Chrome"
 		case "Visual Studio Code": 					act = "VS Code"
 		case "Windows Explorer": 					act = "Win Explorer"
 		case "mobile - com.hengye.share": 			act = "(m)share"
-		case "wechat":								act = "(m)Wechat"
+		case "wechat":								act = "Wechat"
 		case "Google Chrome":						act = "Chrome"
 		}
 		if strings.Contains(act, ".github.io") {
