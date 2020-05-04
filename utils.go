@@ -115,12 +115,26 @@ func getToday(data *rescuetime.AnalyticData) []string {
 		case "mobile - com.hengye.share": 			act = "(m)share"
 		case "wechat":								act = "Wechat"
 		case "Google Chrome":						act = "Chrome"
+		case "en.wikipedia.org":					act = "en.wikipedia"
 		}
 		if strings.Contains(act, ".github.io") {
 			act = "*.github.io"
 		}
 		if len(act) > 14 {
-			act = act[:14]
+			idx := len(act) - 4
+			if strings.Contains(act, ".com") {act = act[:idx]}
+			if strings.Contains(act, ".org") {act = act[:idx]}
+			if strings.Contains(act, ".net") {act = act[:idx]}
+			if len(act) > 14 {act = act[:14]}
+		}
+		if strings.Contains(act, "cdonnmf") {
+			act = "[Saladict](https://github.com/crimx/ext-saladict)"
+		}
+		if strings.Contains(act, "quicker") {
+			act = "[quicker](https://getquicker.net/)"
+		}
+		if strings.Contains(act, "youtube music") {
+			act = "[youtube music](https://github.com/ytmdesktop/ytmdesktop)"
 		}
 		categ := row.Category
 		switch categ {
