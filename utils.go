@@ -15,6 +15,89 @@ import (
 	"time"
 )
 
+func fromSummaryGetsuString(suList []rescuetime.DailySummary, tod string) string {
+	suString := ""
+	for _, su := range suList {
+		if su.Date == tod {
+			fmt.Println(suString)
+			var m float64
+			tAct := ""
+			tT := ""
+			tL := ""
+			m = 0
+			if su.BusinessHours > m {
+				m = su.BusinessHours
+				tAct = "Bussiness"
+				tT = strings.Replace(su.BusinessDurationFormatted, " ", "", -1)
+				tL = "🧡"
+			}
+			if su.CommunicationAndSchedulingHours > m {
+				m = su.CommunicationAndSchedulingHours
+				tAct = "Communication"
+				tT = strings.Replace(su.CommunicationAndSchedulingDurationFormatted, " ", "", -1)
+				tL = "🧡"
+			}
+			if su.DesignAndCompositionHours > m {
+				m = su.DesignAndCompositionHours
+				tAct = "Composition"
+				tT = strings.Replace(su.DesignAndCompositionDurationFormatted, " ", "", -1)
+				tL = "💖"
+			}
+			if su.EntertainmentHours > m {
+				m = su.EntertainmentHours
+				tAct = "Entertainment"
+				tT = strings.Replace(su.EntertainmentDurationFormatted, " ", "", -1)
+				tL = "💚"
+			}
+			if su.NewsHours > m {
+				m = su.NewsHours
+				tAct = "News"
+				tT = strings.Replace(su.NewsDurationFormatted, " ", "", -1)
+				tL = "💜"
+			}
+			if su.ReferenceAndLearningHours > m {
+				m = su.ReferenceAndLearningHours
+				tAct = "Reference"
+				tT = strings.Replace(su.ReferenceAndLearningDurationFormatted, " ", "", -1)
+				tL = "🧡"
+			}
+			if su.ShoppingHours > m {
+				m = su.ShoppingHours
+				tAct = "Shopping"
+				tT = strings.Replace(su.ShoppingDurationFormatted, " ", "", -1)
+				tL = "💚"
+			}
+			if su.SocialNetworkingHours > m {
+				m = su.SocialNetworkingHours
+				tAct = "SNS"
+				tT = strings.Replace(su.SocialNetworkingDurationFormatted, " ", "", -1)
+				tL = "💚"
+			}
+			if su.SoftwareDevelopmentHours > m {
+				m = su.SoftwareDevelopmentHours
+				tAct = "Dev"
+				tT = strings.Replace(su.SoftwareDevelopmentDurationFormatted, " ", "", -1)
+				tL = "💖"
+			}
+			if su.UncategorizedHours > m {
+				m = su.UncategorizedHours
+				tAct = "Unknown"
+				tT = strings.Replace(su.UncategorizedDurationFormatted, " ", "", -1)
+				tL = "💛"
+			}
+			if su.UtilitiesHours > m {
+				m = su.UtilitiesHours
+				tAct = "Utilities"
+				tT = strings.Replace(su.UtilitiesDurationFormatted, " ", "", -1)
+				tL = "💛"
+			}
+			suString = "Total logged time: " + "" + strings.Replace(su.TotalDurationFormatted, " ", "", -1) + ";"
+			suString = suString + " Today's theme is: " + "**" + tAct + "**" + tL + " (" + tT + ")"
+		}
+	}
+	return suString
+}
+
 func NewAnalyticDataQueryParameters(Perspective, ResolutionTime, RestrictGroup, RestrictBegin, RestrictEnd, RestrictKind, RestrictThing, RestrictThingy string) rescuetime.AnalyticDataQueryParameters {
 	var adqp rescuetime.AnalyticDataQueryParameters
 	if Perspective == ""{
@@ -90,10 +173,10 @@ func sec2asterisk(sec int) string {
 	return strings.Repeat("l", l)
 }
 
-func getToday(data *rescuetime.AnalyticData) []string {
+func getToday(data *rescuetime.AnalyticData, tod, suString string) []string {
 	var cont []string
 	t := time.Now().Format("2006-01-02 15:04")
-	hrow := "## yiyangiliu " + t[:10] + " Detailed Activaties, "
+	hrow := "## yiyangiliu " + tod + " Detailed Activaties, "
 	shrow := "Update at " + t[11:]
 	frow := "|Rank|Activity|Len|Time|Category|Label|"
 	srow := "|-|-|-|-|-|-|"
@@ -116,10 +199,19 @@ func getToday(data *rescuetime.AnalyticData) []string {
 		case "wechat":								act = "Wechat"
 		case "Google Chrome":						act = "Chrome"
 		case "en.wikipedia.org":					act = "en.wikipedia"
+		case "mobile - com.taobao.taobao":			act = "(m)Taobao"
+		case "Command Prompt": 						act = "Win Cmd"
 		}
 		if strings.Contains(act, ".github.io") {
 			act = "*.github.io"
 		}
+		if strings.Contains(act, "mobile - net.oneplus.launcher") {
+			act = "(m)launcher"
+		}
+		if strings.Contains(act, "mobile - com.rammigsoftware.bluecoins") {
+			act = "(m)[bluecoins](https://www.google.com/search?q=bluecoins)"
+		}
+
 		if len(act) > 14 {
 			idx := len(act) - 4
 			if strings.Contains(act, ".com") {act = act[:idx]}
@@ -128,7 +220,13 @@ func getToday(data *rescuetime.AnalyticData) []string {
 			if len(act) > 14 {act = act[:14]}
 		}
 		if strings.Contains(act, "cdonnmf") {
-			act = "[Saladict](https://github.com/crimx/ext-saladict)"
+			act = "[Saladict](https://github.com/crimx/ext-saladict#saladict-%E6%B2%99%E6%8B%89%E6%9F%A5%E8%AF%8D) PDF"
+		}
+		if strings.Contains(act, "(m)Taobao") {
+			act = "(m)[Taobao](https://en.wikipedia.org/wiki/Taobao"
+		}
+		if strings.Contains(act, "zhihu") {
+			act = strings.Replace(act, "zhihu", "[zhihu](https://en.wikipedia.org/wiki/Zhihu)", -1)
 		}
 		if strings.Contains(act, "quicker") {
 			act = "[quicker](https://getquicker.net/)"
@@ -136,23 +234,59 @@ func getToday(data *rescuetime.AnalyticData) []string {
 		if strings.Contains(act, "youtube music") {
 			act = "[youtube music](https://github.com/ytmdesktop/ytmdesktop)"
 		}
+		if strings.Contains(act, "huggingface.co") {
+			act = "[huggingface.co](https://huggingface.co/)"
+		}
+		if strings.Contains(act, "paperswithcode") {
+			act = "[paperswithcode](https://paperswithcode.com/area/natural-language-processing/)"
+		}
+		if strings.Contains(act, "linkedin.com") {
+			act = "[linkedin.com](https://www.linkedin.com/in/yiyang-liu-aa56b2192/)"
+		}
+		if strings.Contains(act, "facebook.com") {
+			act = "[facebook.com](https://www.facebook.com/Yiyang.Ian.Liu)"
+		}
+		if strings.Contains(act, "wikipedia") {
+			act = "en.wikipedia"
+		}
+		if strings.Contains(act, "douyu") {
+			act = strings.Replace(act, "douyu", "[douyu](https://www.google.com/search?q=douyu+chinese+twitch)", -1)
+		}
+		if strings.Contains(act, "bilibili") {
+			act = strings.Replace(act, "bilibili", "[bilibili](https://www.youtube.com/watch?v=f-wBecEp6Mk&t=560s)", -1)
+		}
+		if strings.Contains(act, "stackoverflow") {
+			act = "stackoverflow"
+		}
+		if strings.Contains(act, "programcreek") {
+			act = "[programcreek](https://www.programcreek.com/python/)"
+		}
+
 		categ := row.Category
 		switch categ {
 		case "Editing & IDEs":						categ = "IDE"
 		case "General Software Development":		categ = "Dev"
 		case "General Social Networking":			categ = "SNS"
-		case "General Reference & Learning":		categ = "Ref&Learn"
+		case "General Reference & Learning":		categ = "Reference"
 		case "Internet Utilities":					categ = "Utils"
 		case "General Utilities":					categ = "Utils"
 		case "Uncategorized":						categ = "Unknown"
 		case "Presentation":						categ = "Pre"
+		case "Writing":								categ = "Composing"
+		case "Engineering & Technology":			categ = "Tech"
+		case "Professional Networking":				categ = "Pro"
+		case "General Business":					categ = "Business"
+		case "Intelligence":						categ = "Insights"
+		case "Instant Message":						categ = "IM"
+		case "General News":						categ = "News"
+		case "General Shopping":					categ = "Shopping"
 		}
 		p := strconv.Itoa(row.Productivity)
 		switch p {
 		case "2": p = "💖"
-		case "1": p = "❤"
-		case "0": p = "🙂"
-		case "-1": p = "😥"
+		case "1": p = "🧡"
+		case "0": p = "💛"
+		case "-1": p = "💜"
 		case "-2": p = "💚"
 		}
 		if len(categ) > 12 {
@@ -162,7 +296,11 @@ func getToday(data *rescuetime.AnalyticData) []string {
 		trow = append(trow, r)
 		//fmt.Println(string()
 	}
-	cont = append(cont, hrow, "", shrow, "", frow, srow)
+	if suString == "" {
+		cont = append(cont, hrow, "", shrow, "", frow, srow)
+	} else {
+		cont = append(cont, hrow, "", shrow, "", suString, "", frow, srow)
+	}
 	cont = append(cont, trow...)
 	return cont
 }
@@ -194,6 +332,11 @@ func getHistory(fpath string) []string {
 	return lines
 }
 
+//func histoyWSummary(history string) string {
+//	y := history[5, ]
+//	return history
+//}
+
 // writeLines writes the lines to the given file.
 func writef(lines []string, path string) error {
 	file, err := os.Create(path)
@@ -222,7 +365,7 @@ func coverContent(t, h []string) []string {
 	var cont []string
 	cont = append(cont, h[:5]...)
 	cont = append(cont, t...)
-	cont = append(cont, h[26:]...)
+	cont = append(cont, h[28:]...)
 	return cont
 }
 
