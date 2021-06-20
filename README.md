@@ -1,4 +1,4 @@
-# RescueTime-Github
+# RescueTime-Visualization
 📊 **Automatically** display RescueTime daily Data in your Github repository
 
 Demo: [yiyangiliu/RescueTime-Record](https://github.com/yiyangiliu/RescueTime-Record#rescuetime-record)
